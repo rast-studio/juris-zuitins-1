@@ -14,9 +14,9 @@
   --line: #e0e0e0;
   --white: #ffffff;
   --max: 1120px;
-  --serif: "Lato", system-ui, -apple-system, sans-serif;
-  --display: "Lato", system-ui, -apple-system, sans-serif;
-  --sans: "Lato", system-ui, -apple-system, sans-serif;
+  --serif: "Lato", "Open Sans", system-ui, -apple-system, sans-serif;
+  --display: "Lato", "Open Sans", system-ui, -apple-system, sans-serif;
+  --sans: "Lato", "Open Sans", system-ui, -apple-system, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
