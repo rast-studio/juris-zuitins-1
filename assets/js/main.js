@@ -70,6 +70,17 @@ if (head) {
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
 })();
 
+// avotu audita leģenda (pagaidu review slānis)
+if (document.querySelector('.src-g, .src-y, .src-r')) {
+  var lg = document.createElement('div');
+  lg.className = 'src-legend';
+  lg.innerHTML = '<b>Teksta avoti</b>'
+    + '<span><i style="background:#b7f0c2"></i>1:1 no lv.zuitins.lv</span>'
+    + '<span><i style="background:#ffe6a0"></i>pielabots no lv.zuitins.lv</span>'
+    + '<span><i style="background:#ffb0a8"></i>nav no lv.zuitins.lv</span>';
+  document.body.appendChild(lg);
+}
+
 // contact form (Web3Forms — bez backend)
 const cform = document.getElementById('contactForm');
 if (cform) {
