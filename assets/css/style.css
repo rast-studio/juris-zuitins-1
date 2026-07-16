@@ -166,22 +166,23 @@ h1.page-title, h2.section-title {
 .prose p + p { margin-top: 1.1rem; }
 .prose strong { color: var(--olive-dark); }
 
-/* animēta svītra — noiet vienreiz katrā rindā secīgi un pilnībā pazūd (spilgts kodols + mirdzums) */
+/* animēta svītra — vienmērīgi ieslīd un izslīd (maska mīkstina malas, bez kantēm),
+   katrā rindā stingri secīgi (JS kavējums = animācijas ilgums) */
 .ul-line { position: relative; }
 .ul-line::after {
   content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
   border-radius: 2px; pointer-events: none;
-  background: linear-gradient(90deg, transparent 0%, var(--olive) 36%, #2fe0c8 50%, var(--olive) 64%, transparent 100%);
-  background-repeat: no-repeat; background-size: 55% 100%;
-  background-position: -70% 0; opacity: 0;
-  filter: drop-shadow(0 0 6px rgba(0, 131, 143, .6));
+  background: linear-gradient(90deg, transparent, var(--olive) 35%, #2fe0c8 50%, var(--olive) 65%, transparent);
+  background-repeat: no-repeat; background-size: 50% 100%;
+  background-position: -120% 0;
+  filter: drop-shadow(0 0 5px rgba(0, 131, 143, .45));
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
 }
-.ul-line.ul-run::after { animation: ulSweep 1s cubic-bezier(.45, 0, .25, 1) forwards; }
+.ul-line.ul-run::after { animation: ulSweep .9s linear forwards; }
 @keyframes ulSweep {
-  0%   { background-position: -70% 0; opacity: 0; }
-  14%  { opacity: 1; }
-  86%  { opacity: 1; }
-  100% { background-position: 170% 0; opacity: 0; }
+  from { background-position: -120% 0; }
+  to   { background-position: 220% 0; }
 }
 
 /* uzmanības animācija navbar/hamburgeram, kad aizscrollēts līdz lejai */

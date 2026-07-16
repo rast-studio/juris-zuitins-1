@@ -105,12 +105,14 @@ if (head) {
     return el.querySelectorAll('.ul-line');
   }
 
+  var DUR = 0.9; // s — sakrīt ar ulSweep ilgumu CSS
+
   function run(el) {
     var lines = splitLines(el);
     Array.prototype.forEach.call(lines, function (ln, i) {
       ln.classList.remove('ul-run');
       void ln.offsetWidth; // reflow, lai animāciju var atkārtot
-      ln.style.animationDelay = (i * 0.55) + 's';
+      ln.style.animationDelay = (i * DUR) + 's'; // nākamā rinda sāk tikai kad iepriekšējā pabeigusi
       ln.classList.add('ul-run');
     });
   }
@@ -119,9 +121,16 @@ if (head) {
     Array.prototype.forEach.call(el.querySelectorAll('.ul-line'), function (ln) { ln.classList.remove('ul-run'); });
   }
 
+  // Atkārtojas TIKAI ja lietotājs uzscrollē virs elementa (tas iziet pa apakšu)
+  // un atkal nāk lejā. Ritinot uz augšu garām — neatskaņojas.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) run(e.target); else reset(e.target);
+      var el = e.target;
+      if (e.isIntersecting) {
+        if (!el._done) { run(el); el._done = true; }
+      } else if (e.boundingClientRect.top > 0) {
+        reset(el); el._done = false; // izgāja pa apakšu -> ļauj atkārtoties nākamreiz nākot lejā
+      }
     });
   }, { threshold: 0.6 });
 
@@ -129,9 +138,10 @@ if (head) {
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(start); } else { start(); }
 })();
 
-// uzmanības animācija navbar sadaļām + hamburgeram, kad aizscrollēts līdz lejai (footer redzeslokā)
+// uzmanības animācija navbar sadaļām + hamburgeram, kad aizscrollēts līdz lejai — TIKAI sākumlapā
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (!document.querySelector('.hero')) return; // .hero ir tikai sākumlapā (LV+RU)
   var foot = document.querySelector('.site-foot');
   if (!foot) return;
   var navLinks = document.querySelectorAll('.nav a');
