@@ -128,7 +128,7 @@ a:hover { color: var(--amber); }
 
 .hero-figure { position: relative; }
 .hero-figure img {
-  width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 10%;
+  width: 100%; height: auto; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 10%;
   border-radius: .4rem;
   border: 1px solid var(--line);
 }
