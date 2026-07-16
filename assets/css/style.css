@@ -166,18 +166,36 @@ h1.page-title, h2.section-title {
 .prose p + p { margin-top: 1.1rem; }
 .prose strong { color: var(--olive-dark); }
 
-/* animēta svītra — noiet vienreiz, rindu pa rindai (JS sadala rindās) */
-.ul-line {
-  background-image: linear-gradient(90deg, transparent, var(--olive-dark), transparent);
-  background-repeat: no-repeat;
-  background-size: 42% 2px;
-  background-position: -50% 100%;
-  padding-bottom: 2px;
+/* animēta svītra — noiet vienreiz katrā rindā secīgi un pilnībā pazūd (spilgts kodols + mirdzums) */
+.ul-line { position: relative; }
+.ul-line::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px;
+  border-radius: 2px; pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, var(--olive) 36%, #2fe0c8 50%, var(--olive) 64%, transparent 100%);
+  background-repeat: no-repeat; background-size: 55% 100%;
+  background-position: -70% 0; opacity: 0;
+  filter: drop-shadow(0 0 6px rgba(0, 131, 143, .6));
 }
-.ul-line.ul-run { animation: ulSweep .8s linear forwards; }
+.ul-line.ul-run::after { animation: ulSweep 1s cubic-bezier(.45, 0, .25, 1) forwards; }
 @keyframes ulSweep {
-  from { background-position: -50% 100%; }
-  to   { background-position: 150% 100%; }
+  0%   { background-position: -70% 0; opacity: 0; }
+  14%  { opacity: 1; }
+  86%  { opacity: 1; }
+  100% { background-position: 170% 0; opacity: 0; }
+}
+
+/* uzmanības animācija navbar/hamburgeram, kad aizscrollēts līdz lejai */
+.nav a.attn { animation: navAttn .6s ease; }
+@keyframes navAttn {
+  0%, 100% { transform: translateY(0); }
+  35% { transform: translateY(-5px); color: var(--olive-dark); }
+  70% { transform: translateY(0); }
+}
+.menu-btn.attn span { animation: hamAttn .55s ease; transform-origin: center; }
+.menu-btn.attn span:nth-child(2) { animation-delay: .12s; }
+@keyframes hamAttn {
+  0%, 100% { transform: scaleX(1); background: var(--ink); }
+  50% { transform: scaleX(1.4); background: var(--olive); }
 }
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
@@ -358,14 +376,16 @@ h1.page-title, h2.section-title {
   .office-gallery .fig img { transition: none; }
   .office-gallery .fig:hover img, .btn:hover, .card:hover { transform: none; }
   .lightbox, .lightbox img { transition: none; }
-  .ul-line.ul-run { animation: none; }
+  .ul-line.ul-run::after { animation: none; }
+  .nav a.attn, .menu-btn.attn span { animation: none; }
 }
 
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-  .hero .wrap { grid-template-columns: 1fr; padding-top: 3rem; padding-bottom: 3rem; }
-  .hero-figure { max-width: 24rem; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 1.8rem; padding-top: 2.2rem; padding-bottom: 3rem; }
+  .hero-figure { order: -1; max-width: none; }
+  .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about { grid-template-columns: 1fr; gap: 2rem; }
   .about-portrait { position: static; order: -1; max-width: 20rem; }

@@ -70,11 +70,11 @@ if (head) {
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
 })();
 
-// animēta pasvītrojuma svītra — noiet vienreiz, rindu pa rindai
-// (tirkīza .prose strong teksts + brand "Juris Zuitiņš")
+// animēta pasvītrojuma svītra — noiet katrā rindā secīgi un pazūd;
+// atkārtojas, kad elements atkal ienāk redzeslokā (.prose strong + hero "Juris Zuitiņš")
 (function () {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  var targets = Array.prototype.slice.call(document.querySelectorAll('.prose strong, .brand'));
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.prose strong, .hero-name b'));
   if (!targets.length) return;
 
   function splitLines(el) {
@@ -108,19 +108,50 @@ if (head) {
   function run(el) {
     var lines = splitLines(el);
     Array.prototype.forEach.call(lines, function (ln, i) {
-      ln.style.animationDelay = (i * 0.6) + 's';
+      ln.classList.remove('ul-run');
+      void ln.offsetWidth; // reflow, lai animāciju var atkārtot
+      ln.style.animationDelay = (i * 0.55) + 's';
       ln.classList.add('ul-run');
     });
+  }
+  function reset(el) {
+    if (!el._ul) return;
+    Array.prototype.forEach.call(el.querySelectorAll('.ul-line'), function (ln) { ln.classList.remove('ul-run'); });
   }
 
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { io.unobserve(e.target); run(e.target); }
+      if (e.isIntersecting) run(e.target); else reset(e.target);
     });
   }, { threshold: 0.6 });
 
   function start() { targets.forEach(function (t) { io.observe(t); }); }
   if (document.fonts && document.fonts.ready) { document.fonts.ready.then(start); } else { start(); }
+})();
+
+// uzmanības animācija navbar sadaļām + hamburgeram, kad aizscrollēts līdz lejai (footer redzeslokā)
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var foot = document.querySelector('.site-foot');
+  if (!foot) return;
+  var navLinks = document.querySelectorAll('.nav a');
+  var ham = document.querySelector('.menu-btn');
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        Array.prototype.forEach.call(navLinks, function (a, i) {
+          a.classList.remove('attn'); void a.offsetWidth;
+          a.style.animationDelay = (i * 0.07) + 's';
+          a.classList.add('attn');
+        });
+        if (ham) { ham.classList.remove('attn'); void ham.offsetWidth; ham.classList.add('attn'); }
+      } else {
+        Array.prototype.forEach.call(navLinks, function (a) { a.classList.remove('attn'); });
+        if (ham) ham.classList.remove('attn');
+      }
+    });
+  }, { threshold: 0.4 });
+  io.observe(foot);
 })();
 
 // contact form (Web3Forms — bez backend)
