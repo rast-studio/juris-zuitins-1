@@ -192,6 +192,13 @@ h1.page-title, h2.section-title {
   30% { transform: translateY(-7px); color: var(--olive-dark); background: var(--sage); }
   60% { transform: translateY(0); }
 }
+/* aktīvā sadaļa (piem. Sākums) — kustas tāpat, bet iekrāsojums paliek visu laiku */
+.nav a[aria-current="page"].attn { animation-name: navAttnActive; }
+@keyframes navAttnActive {
+  0%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-7px); }
+  60% { transform: translateY(0); }
+}
 .menu-btn.attn span { animation: hamAttn 1.3s ease; transform-origin: center; }
 .menu-btn.attn span:nth-child(2) { animation-delay: .15s; }
 @keyframes hamAttn {
