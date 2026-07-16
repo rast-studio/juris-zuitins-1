@@ -70,6 +70,59 @@ if (head) {
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
 })();
 
+// animēta pasvītrojuma svītra — noiet vienreiz, rindu pa rindai
+// (tirkīza .prose strong teksts + brand "Juris Zuitiņš")
+(function () {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var targets = Array.prototype.slice.call(document.querySelectorAll('.prose strong, .brand'));
+  if (!targets.length) return;
+
+  function splitLines(el) {
+    if (el._ul) return el.querySelectorAll('.ul-line');
+    var text = el.textContent;
+    el.textContent = '';
+    var words = [];
+    text.split(/(\s+)/).forEach(function (tok) {
+      if (tok === '') return;
+      if (/^\s+$/.test(tok)) { el.appendChild(document.createTextNode(tok)); }
+      else { var w = document.createElement('span'); w.textContent = tok; el.appendChild(w); words.push(w); }
+    });
+    var lines = [], top = null, cur = null;
+    words.forEach(function (w) {
+      var t = w.offsetTop;
+      if (top === null || Math.abs(t - top) > 4) { cur = []; lines.push(cur); top = t; }
+      cur.push(w.textContent);
+    });
+    el.textContent = '';
+    lines.forEach(function (grp, i) {
+      var line = document.createElement('span');
+      line.className = 'ul-line';
+      line.textContent = grp.join(' ');
+      el.appendChild(line);
+      if (i < lines.length - 1) el.appendChild(document.createTextNode(' '));
+    });
+    el._ul = true;
+    return el.querySelectorAll('.ul-line');
+  }
+
+  function run(el) {
+    var lines = splitLines(el);
+    Array.prototype.forEach.call(lines, function (ln, i) {
+      ln.style.animationDelay = (i * 0.6) + 's';
+      ln.classList.add('ul-run');
+    });
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { io.unobserve(e.target); run(e.target); }
+    });
+  }, { threshold: 0.6 });
+
+  function start() { targets.forEach(function (t) { io.observe(t); }); }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(start); } else { start(); }
+})();
+
 // contact form (Web3Forms — bez backend)
 const cform = document.getElementById('contactForm');
 if (cform) {
