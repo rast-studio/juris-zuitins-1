@@ -23,3 +23,39 @@ const io = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// contact form (Web3Forms — bez backend)
+const cform = document.getElementById('contactForm');
+if (cform) {
+  const statusEl = cform.querySelector('.form-status');
+  const submitBtn = cform.querySelector('[type="submit"]');
+  const ru = document.documentElement.lang === 'ru';
+  const T = ru ? {
+    sending: 'Отправка…',
+    ok: 'Спасибо! Заявка отправлена, скоро свяжусь с вами.',
+    err: 'Не удалось отправить. Попробуйте ещё раз или напишите на juris@zuitins.lv'
+  } : {
+    sending: 'Sūta…',
+    ok: 'Paldies! Pieteikums nosūtīts, atbildēšu drīz.',
+    err: 'Neizdevās nosūtīt. Mēģiniet vēlreiz vai rakstiet uz juris@zuitins.lv'
+  };
+  cform.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (statusEl) { statusEl.textContent = T.sending; statusEl.className = 'form-status is-sending'; }
+    if (submitBtn) submitBtn.disabled = true;
+    fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(cform) })
+      .then(r => r.json())
+      .then(json => {
+        if (json && json.success) {
+          if (statusEl) { statusEl.textContent = T.ok; statusEl.className = 'form-status is-ok'; }
+          cform.reset();
+        } else {
+          throw new Error((json && json.message) || 'error');
+        }
+      })
+      .catch(() => {
+        if (statusEl) { statusEl.textContent = T.err; statusEl.className = 'form-status is-err'; }
+      })
+      .finally(() => { if (submitBtn) submitBtn.disabled = false; });
+  });
+}

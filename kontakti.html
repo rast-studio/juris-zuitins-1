@@ -56,6 +56,36 @@
         <iframe title="Karte — Artilērijas iela 44a, Rīga" src="https://www.google.com/maps?q=Artil%C4%93rijas%20iela%2044a,%20R%C4%ABga&ll=56.95666,24.14383&z=16&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
+    <div class="contact-form-block reveal">
+      <h2 class="section-title">Uzrakstiet man</h2>
+      <p class="form-lead">Aizpildiet formu, un es sazināšos ar jums. Ja jums ir jautājumi pirms pieteikšanās, uzdodiet tos šeit — atbildēšu personīgi.</p>
+      <form id="contactForm" class="contact-form">
+        <input type="hidden" name="access_key" value="WEB3FORMS_ATSLEGA_JURIS">
+        <input type="hidden" name="subject" value="Jauns pieteikums no zuitins.lv">
+        <input type="hidden" name="from_name" value="zuitins.lv forma">
+        <input type="checkbox" name="botcheck" class="cf-hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="cf-row">
+          <div class="cf-field">
+            <label class="cf-label" for="cfName">Vārds</label>
+            <input class="cf-input" id="cfName" name="Vārds" type="text" required autocomplete="name" placeholder="Jūsu vārds">
+          </div>
+          <div class="cf-field">
+            <label class="cf-label" for="cfEmail">E-pasts</label>
+            <input class="cf-input" id="cfEmail" name="email" type="email" required autocomplete="email" placeholder="lai varu atbildēt">
+          </div>
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cfPhone">Tālrunis <span style="text-transform:none;letter-spacing:0;font-weight:500">(neobligāti)</span></label>
+          <input class="cf-input" id="cfPhone" name="Tālrunis" type="tel" autocomplete="tel" placeholder="+371 …">
+        </div>
+        <div class="cf-field">
+          <label class="cf-label" for="cfMsg">Ziņa</label>
+          <textarea class="cf-textarea" id="cfMsg" name="Ziņa" required placeholder="Īsi pastāstiet, kas jūs interesē"></textarea>
+        </div>
+        <button type="submit" class="btn btn-solid cf-submit">Nosūtīt pieteikumu</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
     <div class="office-gallery reveal">
       <figure class="fig">
         <img src="assets/img/kabinets-1.jpg" alt="Prakses kabinets — krēsli sarunai" loading="lazy">
