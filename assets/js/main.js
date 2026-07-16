@@ -112,7 +112,8 @@ if (head) {
     Array.prototype.forEach.call(lines, function (ln, i) {
       ln.classList.remove('ul-run');
       void ln.offsetWidth; // reflow, lai animāciju var atkārtot
-      ln.style.animationDelay = (i * DUR) + 's'; // nākamā rinda sāk tikai kad iepriekšējā pabeigusi
+      // CSS mainīgais mantojas ::after pseidoelementā (inline animation-delay tur nedarbotos)
+      ln.style.setProperty('--ul-delay', (i * DUR) + 's'); // nākamā rinda sāk tikai kad iepriekšējā pabeigusi
       ln.classList.add('ul-run');
     });
   }

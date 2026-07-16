@@ -179,7 +179,7 @@ h1.page-title, h2.section-title {
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
   mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
 }
-.ul-line.ul-run::after { animation: ulSweep .9s linear forwards; }
+.ul-line.ul-run::after { animation: ulSweep .9s linear forwards; animation-delay: var(--ul-delay, 0s); }
 @keyframes ulSweep {
   from { background-position: -120% 0; }
   to   { background-position: 220% 0; }
