@@ -201,11 +201,11 @@ h1.page-title, h2.section-title {
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
 
-/* attēls teksta garumā (psihoterapija) — aizpilda kolonnas augstumu */
+/* attēls pie teksta (psihoterapija) — mazāks, šaurāka kolonna, nepārsniedz teksta augstumu */
 @media (min-width: 901px) {
-  .two-col--media { align-items: stretch; }
-  .two-col--media .fig { height: 100%; display: flex; flex-direction: column; }
-  .two-col--media .fig img { flex: 1 1 auto; min-height: 0; }
+  .two-col--media { grid-template-columns: 1.6fr 1fr; align-items: start; }
+  .two-col--media .fig { max-width: 24rem; justify-self: end; }
+  .two-col--media .fig img { aspect-ratio: 4/5; object-fit: cover; }
 }
 
 /* about page — teksts lielā blokā + portrets sānā */
