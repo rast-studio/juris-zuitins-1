@@ -290,11 +290,10 @@ h1.page-title, h2.section-title {
 .js .site-head { animation: headIn .65s cubic-bezier(.2, .7, .2, 1) both; }
 @keyframes headIn { from { opacity: 0; transform: translateY(-16px); } to { opacity: 1; transform: none; } }
 
-/* ---------- attēlu hover + klikšķināmība ---------- */
+/* ---------- attēlu efekti — tikai Kontakti galerija ---------- */
 .zoomable { cursor: zoom-in; }
-.fig img, .hero-figure img, .about-portrait img { transition: transform .55s cubic-bezier(.2, .7, .2, 1); }
-.fig:hover img { transform: scale(1.05); }
-.hero-figure:hover img, .about-portrait:hover img { transform: scale(1.03); }
+.office-gallery .fig img { transition: transform .55s cubic-bezier(.2, .7, .2, 1); }
+.office-gallery .fig:hover img { transform: scale(1.05); }
 
 /* pogu un karšu mikroanimācijas */
 .btn { transition: background .2s, color .2s, border-color .2s, transform .25s, box-shadow .25s; }
@@ -335,9 +334,8 @@ h1.page-title, h2.section-title {
     .section > .wrap > *:not(.cards):not(.office-gallery),
     .cards > .card, .office-gallery > .fig, .cta-strip .wrap > *
   ) { opacity: 1; transform: none; transition: none; }
-  .fig img, .hero-figure img, .about-portrait img { transition: none; }
-  .fig:hover img, .hero-figure:hover img, .about-portrait:hover img,
-  .btn:hover, .card:hover { transform: none; }
+  .office-gallery .fig img { transition: none; }
+  .office-gallery .fig:hover img, .btn:hover, .card:hover { transform: none; }
   .lightbox, .lightbox img { transition: none; }
 }
 
