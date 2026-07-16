@@ -400,9 +400,9 @@ h1.page-title, h2.section-title {
   .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: 0; border: 0; }
   .hero-figure::after {
     content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 52%, var(--paper) 96%);
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 68%, var(--paper) 98%);
   }
-  .hero .wrap > div:first-child { position: relative; z-index: 2; margin-top: -6rem; }
+  .hero .wrap > div:first-child { position: relative; z-index: 2; margin-top: -4.5rem; }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about { grid-template-columns: 1fr; gap: 2rem; }
   .about-portrait { position: static; order: -1; max-width: 20rem; }
