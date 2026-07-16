@@ -339,21 +339,6 @@ h1.page-title, h2.section-title {
   .lightbox, .lightbox img { transition: none; }
 }
 
-/* ===== AVOTU AUDITS (pagaidu review slānis — noņemams) ===== */
-.src-g { background: #b7f0c2 !important; }
-.src-y { background: #ffe6a0 !important; }
-.src-r { background: #ffb0a8 !important; }
-:is(.src-g, .src-y, .src-r) { border-radius: 3px; box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: .04em .18em; }
-.src-legend {
-  position: fixed; right: 1rem; bottom: 1rem; z-index: 200;
-  background: #fff; border: 1px solid #d0d0d0; border-radius: .7rem;
-  box-shadow: 0 12px 34px rgba(0,0,0,.18); padding: .85rem 1rem;
-  font-family: var(--sans); font-size: .8rem; color: #212121; max-width: 16rem;
-}
-.src-legend b { display: block; margin-bottom: .5rem; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: #555; }
-.src-legend span { display: flex; align-items: center; gap: .55rem; margin: .3rem 0; line-height: 1.3; }
-.src-legend i { width: 1rem; height: 1rem; border-radius: 3px; flex: none; }
-
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
