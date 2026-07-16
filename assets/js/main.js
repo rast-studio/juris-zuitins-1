@@ -16,13 +16,59 @@ if (head) {
   onScroll();
 }
 
-// scroll reveal
-const io = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+// scroll reveal ar staggered kavējumu (elementi slēpti caur CSS, kad .js uzlikts <head>)
+(function () {
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var SEL = '.hero .wrap > div:first-child > *, .hero-figure, .section > .wrap > *:not(.cards):not(.office-gallery), .cards > .card, .office-gallery > .fig, .cta-strip .wrap > *';
+  var els = Array.prototype.slice.call(document.querySelectorAll(SEL));
+  if (reduce) { els.forEach(function (el) { el.classList.add('in'); }); return; }
+  els.forEach(function (el) {
+    var sibs = Array.prototype.filter.call(el.parentNode.children, function (c) { return c.matches(SEL); });
+    var i = sibs.indexOf(el);
+    var d = Math.min(i, 6) * 70;
+    if (el.classList.contains('hero-figure')) d = 150;
+    el.style.transitionDelay = d + 'ms';
   });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+// lightbox — klikšķini uz jebkuru .zoomable attēlu, lai palielinātu
+(function () {
+  var imgs = document.querySelectorAll('img.zoomable');
+  if (!imgs.length) return;
+  var box = document.createElement('div');
+  box.className = 'lightbox';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.innerHTML = '<button class="lightbox__close" type="button" aria-label="Aizvērt">×</button><img alt="">';
+  document.body.appendChild(box);
+  var big = box.querySelector('img');
+  var closeBtn = box.querySelector('.lightbox__close');
+  var lastFocus = null;
+
+  function open(src, alt) {
+    lastFocus = document.activeElement;
+    big.src = src; big.alt = alt || '';
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function close() {
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+    if (lastFocus) { try { lastFocus.focus(); } catch (e) {} }
+  }
+  Array.prototype.forEach.call(imgs, function (im) {
+    im.addEventListener('click', function () { open(im.currentSrc || im.src, im.alt); });
+  });
+  box.addEventListener('click', function (e) { if (e.target === box || e.target === big || e.target === closeBtn) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && box.classList.contains('open')) close(); });
+})();
 
 // contact form (Web3Forms — bez backend)
 const cform = document.getElementById('contactForm');
