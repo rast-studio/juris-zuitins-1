@@ -384,9 +384,16 @@ h1.page-title, h2.section-title {
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-  .hero .wrap { grid-template-columns: 1fr; gap: 1.8rem; padding-top: 2.2rem; padding-bottom: 3rem; }
-  .hero-figure { order: -1; max-width: none; }
-  .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; }
+  /* hero = viens vienots bloks: foto pilnā platumā, apakšā izgaist, teksts ieplūst virsū */
+  .hero { background: var(--paper); }
+  .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 0; padding-bottom: 2.6rem; }
+  .hero-figure { order: -1; max-width: none; margin: 0 -1.5rem; }
+  .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: 0; border: 0; }
+  .hero-figure::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 52%, var(--paper) 96%);
+  }
+  .hero .wrap > div:first-child { position: relative; z-index: 2; margin-top: -6rem; }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about { grid-template-columns: 1fr; gap: 2rem; }
   .about-portrait { position: static; order: -1; max-width: 20rem; }
