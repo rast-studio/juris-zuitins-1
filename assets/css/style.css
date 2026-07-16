@@ -164,9 +164,29 @@ h1.page-title, h2.section-title {
 
 .prose { max-width: 44rem; }
 .prose p + p { margin-top: 1.1rem; }
-.prose strong { color: var(--olive-dark); }
+.prose strong {
+  color: var(--olive-dark);
+  background-image: linear-gradient(90deg, transparent, var(--olive-dark), transparent);
+  background-repeat: no-repeat;
+  background-size: 45% 2px;
+  background-position: -55% 100%;
+  padding-bottom: 2px;
+  -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  animation: strongUnderline 2.6s linear infinite;
+}
+@keyframes strongUnderline {
+  from { background-position: -55% 100%; }
+  to   { background-position: 155% 100%; }
+}
 
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
+
+/* attēls teksta garumā (psihoterapija) — aizpilda kolonnas augstumu */
+@media (min-width: 901px) {
+  .two-col--media { align-items: stretch; }
+  .two-col--media .fig { height: 100%; display: flex; flex-direction: column; }
+  .two-col--media .fig img { flex: 1 1 auto; min-height: 0; }
+}
 
 /* about page — teksts lielā blokā + portrets sānā */
 .about { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: start; margin-top: .5rem; }
@@ -337,6 +357,7 @@ h1.page-title, h2.section-title {
   .office-gallery .fig img { transition: none; }
   .office-gallery .fig:hover img, .btn:hover, .card:hover { transform: none; }
   .lightbox, .lightbox img { transition: none; }
+  .prose strong { animation: none; background-image: none; }
 }
 
 /* ---------- responsive ---------- */
