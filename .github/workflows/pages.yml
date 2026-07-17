@@ -50,7 +50,7 @@ jobs:
         run: |
           echo "found=0" >> "$GITHUB_OUTPUT"
           for i in $(seq 1 105); do
-            if curl -s "https://rast-studio.github.io/juris-zuitins-1/?b=${{ github.sha }}-$i" | grep -q "${{ github.sha }}"; then
+            if curl -s "https://zuitins.lv/?b=${{ github.sha }}-$i" | grep -q "${{ github.sha }}"; then
               echo "jaunais saturs dzīvs pēc $i mēģin."
               echo "found=1" >> "$GITHUB_OUTPUT"
               exit 0
