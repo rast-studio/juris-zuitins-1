@@ -253,6 +253,11 @@ h1.page-title, h2.section-title {
 .fig { border-radius: .7rem; overflow: hidden; }
 .fig img { display: block; width: 100%; height: auto; object-fit: cover; }
 
+/* attēls ar parakstu (psihoterapija) */
+.fig-cap { overflow: visible; }
+.fig-cap img { border-radius: .7rem; }
+.fig-cap figcaption { margin-top: .9rem; font-family: var(--display); font-style: italic; font-size: 1.05rem; color: var(--ink-soft); text-align: center; }
+
 /* about page: credential timeline (years are a real sequence) */
 .timeline { list-style: none; max-width: 44rem; }
 .timeline li { display: grid; grid-template-columns: 6.5rem 1fr; gap: 1.2rem; padding: 1.1rem 0; border-bottom: 1px solid var(--line); }
