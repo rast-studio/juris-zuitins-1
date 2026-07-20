@@ -224,9 +224,12 @@ h1.page-title, h2.section-title {
 .about { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: start; margin-top: .5rem; }
 .about-text { max-width: 62rem; font-size: 1.08rem; }
 .about-text p + p { margin-top: 1.2rem; }
+/* Par mani — datorā taisnstūra portrets sānā; telefonā apaļa profila bilde (skat. media) */
 .about-portrait { position: sticky; top: 6rem; }
-.about-portrait img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 20%; border-radius: .4rem; border: 1px solid var(--line); }
-.about-portrait figcaption { margin-top: .7rem; font-family: var(--sans); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); text-align: center; }
+.about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 16%; border-radius: .5rem; border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(38, 46, 40, .13); }
+/* klades attēls teksta vidū */
+.about-note { max-width: 34rem; margin: 2.4rem 0; box-shadow: 0 10px 26px rgba(38, 46, 40, .12); }
+.about-note img { aspect-ratio: 3/2; object-fit: cover; }
 
 /* question pull-quote device */
 .pull-q {
@@ -257,6 +260,9 @@ h1.page-title, h2.section-title {
 .fig-cap { overflow: visible; }
 .fig-cap img { border-radius: .7rem; }
 .fig-cap figcaption { margin-top: .9rem; font-family: var(--display); font-style: italic; font-size: 1.05rem; color: var(--ink-soft); text-align: center; }
+
+/* attēls teksta beigās (sākumlapa, psihoterapija) — centrēts, mērens izmērs */
+.fig-end { max-width: 46rem; margin: 2.8rem auto 0; box-shadow: 0 10px 28px rgba(38, 46, 40, .10); }
 
 /* about page: credential timeline (years are a real sequence) */
 .timeline { list-style: none; max-width: 44rem; }
@@ -403,19 +409,24 @@ h1.page-title, h2.section-title {
 /* ---------- responsive ---------- */
 
 @media (max-width: 900px) {
-  /* hero = viens vienots bloks: foto pilnā platumā, apakšā izgaist, teksts ieplūst virsū */
-  .hero { background: var(--paper); }
-  .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 0; padding-bottom: 2.6rem; }
-  .hero-figure { order: -1; max-width: none; margin: 0 -1.5rem; }
-  .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: 0; border: 0; }
-  .hero-figure::after {
-    content: ""; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 68%, var(--paper) 98%);
-  }
-  .hero .wrap > div:first-child { position: relative; z-index: 2; margin-top: -4.5rem; }
+  /* hero telefonā: kompakts portrets ievietots starp ievadtekstu un vārdu.
+     display:contents padara teksta bloku par "caurspīdīgu", tā bērni kļūst par
+     režģa elementiem līdzās bildei, tāpēc tos var sakārtot ar order. */
+  .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 2.6rem; padding-bottom: 2.8rem; }
+  .hero .wrap > div:first-child { display: contents; }
+  .hero .eyebrow { order: 1; }
+  .hero .hero-q { order: 2; }
+  .hero .hero-sub { order: 3; }
+  .hero-figure { order: 4; max-width: 15rem; margin: 1.7rem auto .3rem; }
+  .hero .hero-name { order: 5; }
+  .hero .hero-cta { order: 6; }
+  .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: .5rem; border: 1px solid var(--line); }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .about { grid-template-columns: 1fr; gap: 2rem; }
-  .about-portrait { position: static; order: -1; max-width: 20rem; }
+  /* telefonā portrets kļūst par apaļu profila bildi (Juris skatās telefonā) */
+  .about-portrait { position: static; order: -1; }
+  .about-photo { width: 12rem; height: 12rem; aspect-ratio: 1/1; object-position: 50% 14%; border-radius: 50%; margin: 0 auto; }
+  .about-note { max-width: none; margin: 1.8rem 0; }
 }
 
 @media (max-width: 860px) {
