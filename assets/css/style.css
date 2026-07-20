@@ -33,6 +33,7 @@ body {
 }
 
 img { max-width: 100%; display: block; }
+picture { display: contents; } /* <picture> neveido kastīti — img mantojas kā tiešs bērns */
 
 a { color: var(--olive-dark); text-decoration-thickness: 1px; text-underline-offset: 3px; }
 a:hover { color: var(--amber); }
