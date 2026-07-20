@@ -412,14 +412,15 @@ h1.page-title, h2.section-title {
   /* hero telefonā: kompakts portrets ievietots starp ievadtekstu un vārdu.
      display:contents padara teksta bloku par "caurspīdīgu", tā bērni kļūst par
      režģa elementiem līdzās bildei, tāpēc tos var sakārtot ar order. */
-  .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 2.6rem; padding-bottom: 2.8rem; }
+  .hero .wrap { grid-template-columns: 1fr; gap: 0; padding-top: 1.8rem; padding-bottom: 2.6rem; }
   .hero .wrap > div:first-child { display: contents; }
-  .hero .eyebrow { order: 1; }
-  .hero .hero-q { order: 2; }
-  .hero .hero-sub { order: 3; }
-  .hero-figure { order: 4; max-width: 15rem; margin: 1.7rem auto .3rem; }
-  .hero .hero-name { order: 5; }
-  .hero .hero-cta { order: 6; }
+  /* telefonā viss hero saturs centrēts, lai teksts un centrētā bilde izskatās vienoti */
+  .hero .eyebrow { order: 1; text-align: center; }
+  .hero .hero-q { order: 2; text-align: center; }
+  .hero .hero-sub { order: 3; text-align: center; margin-left: auto; margin-right: auto; }
+  .hero-figure { order: 4; max-width: 15rem; margin: 1.7rem auto .4rem; }
+  .hero .hero-name { order: 5; text-align: center; }
+  .hero .hero-cta { order: 6; justify-content: center; }
   .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: .5rem; border: 1px solid var(--line); }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   /* Par mani telefonā — mazāka apaļa bilde blakus virsrakstam */
