@@ -18,8 +18,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Ieliek build marķieri
-        run: sed -i "s/BUILD_SHA/${{ github.sha }}/" index.html
+      - name: Ieliek build marķieri (versijas visos HTML — CSS/JS keša atsvaidzināšanai)
+        run: find . -name '*.html' -exec sed -i "s/BUILD_SHA/${{ github.sha }}/g" {} +
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .
