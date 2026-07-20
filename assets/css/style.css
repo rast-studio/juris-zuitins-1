@@ -221,16 +221,17 @@ h1.page-title, h2.section-title {
 }
 
 /* about page — teksts lielā blokā + portrets sānā */
-/* Par mani — apaļa portreta bilde blakus virsrakstam (telefonā un datorā) */
-.about-head { display: flex; align-items: center; gap: 1.7rem; margin: .5rem 0 2.4rem; }
+/* Par mani — apaļa portreta bilde blakus virsrakstam (telefonā un datorā);
+   saturs centrēts vienā kolonnā, lai datorā nav piespiests pa kreisi */
+.about-head { display: flex; align-items: center; gap: 1.7rem; max-width: 52rem; margin: .5rem auto 2.4rem; }
 .about-avatar { flex: 0 0 auto; width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; object-position: 50% 14%; border: 1px solid var(--line); box-shadow: 0 10px 26px rgba(38, 46, 40, .16); }
 .about-head .eyebrow { margin-bottom: .45rem; }
 .about-head .page-title { margin-bottom: 0; }
 .about { margin-top: .5rem; }
-.about-text { max-width: 52rem; font-size: 1.08rem; }
+.about-text { max-width: 52rem; margin: 0 auto; font-size: 1.08rem; }
 .about-text p + p { margin-top: 1.2rem; }
-/* klades attēls teksta vidū */
-.about-note { max-width: 34rem; margin: 2.4rem 0; box-shadow: 0 10px 26px rgba(38, 46, 40, .12); }
+/* klades attēls teksta plūsmā, centrēts kolonnā */
+.about-note { max-width: 40rem; margin: 2.4rem auto; box-shadow: 0 10px 26px rgba(38, 46, 40, .12); }
 .about-note img { aspect-ratio: 3/2; object-fit: cover; }
 
 /* question pull-quote device */
