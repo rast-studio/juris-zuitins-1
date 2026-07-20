@@ -221,12 +221,14 @@ h1.page-title, h2.section-title {
 }
 
 /* about page — teksts lielā blokā + portrets sānā */
-.about { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 3.5rem; align-items: start; margin-top: .5rem; }
-.about-text { max-width: 62rem; font-size: 1.08rem; }
+/* Par mani — apaļa portreta bilde blakus virsrakstam (telefonā un datorā) */
+.about-head { display: flex; align-items: center; gap: 1.7rem; margin: .5rem 0 2.4rem; }
+.about-avatar { flex: 0 0 auto; width: 8rem; height: 8rem; border-radius: 50%; object-fit: cover; object-position: 50% 14%; border: 1px solid var(--line); box-shadow: 0 10px 26px rgba(38, 46, 40, .16); }
+.about-head .eyebrow { margin-bottom: .45rem; }
+.about-head .page-title { margin-bottom: 0; }
+.about { margin-top: .5rem; }
+.about-text { max-width: 52rem; font-size: 1.08rem; }
 .about-text p + p { margin-top: 1.2rem; }
-/* Par mani — datorā taisnstūra portrets sānā; telefonā apaļa profila bilde (skat. media) */
-.about-portrait { position: sticky; top: 6rem; }
-.about-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: 50% 16%; border-radius: .5rem; border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(38, 46, 40, .13); }
 /* klades attēls teksta vidū */
 .about-note { max-width: 34rem; margin: 2.4rem 0; box-shadow: 0 10px 26px rgba(38, 46, 40, .12); }
 .about-note img { aspect-ratio: 3/2; object-fit: cover; }
@@ -260,9 +262,6 @@ h1.page-title, h2.section-title {
 .fig-cap { overflow: visible; }
 .fig-cap img { border-radius: .7rem; }
 .fig-cap figcaption { margin-top: .9rem; font-family: var(--display); font-style: italic; font-size: 1.05rem; color: var(--ink-soft); text-align: center; }
-
-/* attēls teksta beigās (sākumlapa, psihoterapija) — centrēts, mērens izmērs */
-.fig-end { max-width: 46rem; margin: 2.8rem auto 0; box-shadow: 0 10px 28px rgba(38, 46, 40, .10); }
 
 /* about page: credential timeline (years are a real sequence) */
 .timeline { list-style: none; max-width: 44rem; }
@@ -422,10 +421,9 @@ h1.page-title, h2.section-title {
   .hero .hero-cta { order: 6; }
   .hero-figure img { aspect-ratio: 4/5; object-position: 50% 12%; border-radius: .5rem; border: 1px solid var(--line); }
   .two-col, .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .about { grid-template-columns: 1fr; gap: 2rem; }
-  /* telefonā portrets kļūst par apaļu profila bildi (Juris skatās telefonā) */
-  .about-portrait { position: static; order: -1; }
-  .about-photo { width: 12rem; height: 12rem; aspect-ratio: 1/1; object-position: 50% 14%; border-radius: 50%; margin: 0 auto; }
+  /* Par mani telefonā — mazāka apaļa bilde blakus virsrakstam */
+  .about-head { gap: 1.1rem; margin-bottom: 1.9rem; }
+  .about-avatar { width: 5rem; height: 5rem; }
   .about-note { max-width: none; margin: 1.8rem 0; }
 }
 
